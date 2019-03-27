@@ -64,6 +64,24 @@ namespace nLove_inclass8
                 {
                     Console.WriteLine("No rows inserted.");
                 }
+
+                string query3 = "SELECT Teacher_FName, Teacher_LName, Teacher_Age " +
+                    "FROM Teachers " +
+                    "WHERE Teacher_ID < 110";
+                SqlCommand comm3 = new SqlCommand(query3, conn);
+
+                comm3.ExecuteNonQuery();
+
+                SqlDataReader reader = comm3.ExecuteReader();// pulls info from sql according to the query
+
+                while (reader.Read())// reads 1 row at a time and creates array of the results
+                {
+                    Console.WriteLine("{0} {1}, {2}", reader[0], reader[1], reader [2]);// each column: fname, lname, age etc -
+                    //- is under a separate index in array reader in the order of the query
+                }
+
+                reader.Close();
+
             }
             catch (SqlException ex)
             {
